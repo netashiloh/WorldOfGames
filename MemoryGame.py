@@ -17,8 +17,11 @@ def generate_sequence(difficulty):
 
 def show_sequence(x):
     print(x)
-    sleep(0.7)
-    os.system('clear')
+    sleep(5)
+    if os.name == 'nt':
+        os.system('clear')
+    else:
+        os.system('cls')
 
 
 def get_list_from_user(difficulty):
