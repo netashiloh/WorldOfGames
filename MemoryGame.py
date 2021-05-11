@@ -2,6 +2,7 @@ import random
 from time import sleep
 import os
 from Helpers import integer_check
+from Utils import screen_cleaner
 
 
 def generate_sequence(difficulty):
@@ -17,11 +18,8 @@ def generate_sequence(difficulty):
 
 def show_sequence(x):
     print(x)
-    sleep(5)
-    if os.name == 'nt':
-        os.system('clear')
-    else:
-        os.system('cls')
+    sleep(0.7)
+    screen_cleaner()
 
 
 def get_list_from_user(difficulty):
@@ -39,12 +37,16 @@ def get_list_from_user(difficulty):
 def is_list_equal(x, y):
     if x == y:
         print("You won!")
+        return True
     else:
         print("Nice try.\nMaybe next time...")
+        return False
 
 
 def play(difficulty):
     x = generate_sequence(difficulty)
     show_sequence(x)
     y = get_list_from_user(difficulty)
-    is_list_equal(x, y)
+    result = is_list_equal(x, y)
+    return result
+

@@ -2,9 +2,14 @@ from GuessGame import play as play_guess
 from MemoryGame import play as play_memory
 from CurrencyRouletteGame import play as play_currency
 from Helpers import in_range
+from Scores import clear_score
+from Scores import add_score
+from Utils import screen_cleaner
 
 
 def welcome():
+    screen_cleaner()
+    clear_score()
     name = input("What is your name? ")
     # Check if valid name
     while not all(char.isalpha() for char in name) or not len(name) > 1:
@@ -15,11 +20,11 @@ Here you can find many cool games to play."
 
 def play_game(game_number, difficulty):
     if game_number == 1:
-        play_memory(difficulty)
+        return play_memory(difficulty)
     elif game_number == 2:
-        play_guess(difficulty)
+        return play_guess(difficulty)
     elif game_number == 3:
-        play_currency(difficulty)
+        return play_currency(difficulty)
 
 
 def play_again():
@@ -49,5 +54,7 @@ def load_game():
 
         # Choose difficulty within range
         level_number = in_range(level, 1, 6)
-        play_game(game_number, level_number)
+        game_result = play_game(game_number, level_number)
+        if game_result:
+            add_score(level_number)
         playing = play_again()

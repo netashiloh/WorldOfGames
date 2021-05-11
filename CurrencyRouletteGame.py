@@ -1,6 +1,6 @@
 import random
 from Helpers import integer_check
-from openexchangerate import OpenExchangeRates
+#from openexchangerate import OpenExchangeRates
 
 
 def describe_game():
@@ -24,14 +24,15 @@ def get_money_interval(converted_value, difficulty):
 
 def get_exchange_rate(value):
     # define api and api key
-    client = OpenExchangeRates(api_key="873650114a6e43e8b46644757901d1fc")
+    ##client = OpenExchangeRates(api_key="873650114a6e43e8b46644757901d1fc")
     # Get the latest foreign exchange rates from USD to ILS
-    latest_conversions = (client.latest()[0])
+    ##latest_conversions = (client.latest()[0])
     # Get the latest ILS rate
-    ils_value = latest_conversions['ILS']
+    ##ils_value = latest_conversions['ILS']
 
     # convert (get exchange rate of given value)
-    return ils_value * value
+    ##return ils_value * value
+    return 3.29 * value
 
 
 def get_guess_from_user(value):
@@ -42,8 +43,10 @@ def get_guess_from_user(value):
 def compare_guess_with_converted_value(player_input, interval):
     if player_input in range(interval[0], interval[1]+1):
         print("You won!")
+        return True
     else:
         print("You suck.")
+        return False
 
 
 def play(difficulty):
@@ -51,7 +54,5 @@ def play(difficulty):
     value = value_of_money()
     converted_value = get_exchange_rate(value)
     player_input = get_guess_from_user(value)
-    compare_guess_with_converted_value(player_input, get_money_interval(converted_value, difficulty))
-
-
-play(1)
+    result = compare_guess_with_converted_value(player_input, get_money_interval(converted_value, difficulty))
+    return result
