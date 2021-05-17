@@ -34,12 +34,13 @@ def get_list_from_user(difficulty):
     return list_from_user
 
 
-def is_list_equal(x, y):
-    if x == y:
+def is_list_equal(result, player_input):
+    if result == player_input:
         print("You won!")
         return True
     else:
         print("Nice try.\nMaybe next time...")
+        print("The answer was: " + str(result))
         return False
 
 

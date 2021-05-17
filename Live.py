@@ -32,6 +32,7 @@ def play_again():
     while answer != "yes" or answer != "no":
         answer = input("Would you like to play another game? (type yes or no) ")
         if answer == "yes":
+            screen_cleaner()
             return True
         elif answer == "no":
             print("Thank you for playing.")
