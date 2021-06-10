@@ -1,0 +1,2 @@
+docker build -t wog .
+docker run -d -p 8777:8777 wog

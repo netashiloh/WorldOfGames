@@ -15,6 +15,3 @@ def add_score(difficulty):
     my_file.truncate()
     my_file.write(str(new_score))
     my_file.close()
-
-
-add_score(5)
