@@ -1,2 +1,18 @@
+#build image
 docker build -t wog .
-docker run -d -p 8777:8777 wog
+
+#run docker detached, port forwarding with volume
+docker run -d -p 8777:8777 --name wog_container --mount source=myvol,target=/app wog
+
+
+#removing docker container without deleting volume
+docker rm -f {container ID}
+
+#removing docker image
+docker image rm -f wog
+
+
+
+cd "/var/lib/docker/volumes/myvol/_data"
+
+cd "/home/ubuntu/WorldOfGames"
