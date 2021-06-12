@@ -5,8 +5,6 @@ pipeline {
         stage('configure repository and checkout') {
             steps {
                 git 'https://github.com/netashiloh/WorldOfGames.git'
-                bat 'git checkout'
-
             }}
         stage('Build and run docker for MainScores app') {
             steps {
@@ -15,8 +13,22 @@ pipeline {
             }}
         stage('test') {
             steps {
-                mystepppps
+                script {
+                bat '''
+                cd tests
+                python e2e.py
+                '''
+                }
+            }}
+        stage ('upload to hub.docker.com') {
+                steps {
+                    bat 'docker tag wog netashiloh/wog'
+                    bat 'docker push netashiloh/wog'
+            }}
+        stage('terminate') {
+            steps {
+                bat 'docker rm -vf wog_container'
+                bat 'docker image rm -f netashiloh/wog'
             }}
         }
-    }
 }
